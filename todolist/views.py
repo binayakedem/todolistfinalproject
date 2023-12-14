@@ -3,9 +3,16 @@ from .models import *
 # Create your views here.
 # start home page design
 def home(request):
-    tasks=Task.objects.all()
+    task=Task.objects
+    tasks=task.all()
+    total=task.count()
+    complete=task.filter(isCompleted=True).count()
+    incomplete=task.filter(isCompleted=False).count()
     context={
-        'tasks':tasks
+        'tasks':tasks,
+        'total':total,
+        'complete':complete,
+        'incomplete':incomplete,
     }
     return render(request,'home.html',context)
 
